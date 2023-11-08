@@ -9,8 +9,18 @@ class Haiku {
     
 }
 const silentTrim = word => {
-    if(word.match(/[$aeiou]/i)) {
-        const trimmed = word.slice(0, word.length - 1);
-        return trimmed;
+    let trimmed = word;
+    if(word.charAt(word.length - 1).match(/[aeiou]/i)) {
+        trimmed = word.slice(0, word.length - 1);
     }
+    return trimmed.replace(/[aeiou]{2}/gi, "a");
 };
+
+// const syllableCount, () => {
+
+// }
+
+// const haikuSplit, () => {
+
+// }
+

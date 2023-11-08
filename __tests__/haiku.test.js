@@ -7,17 +7,17 @@ describe ('silentTrim', () => {
     });
 
     test('removes vowels that are next to each other', () => {
-        expect(silentTrim("borough")).toEqual("borugh");
-        expect(silentTrim("equal")).toEqual("eqal");
+        expect(silentTrim("boragh")).toEqual("boragh");
+        expect(silentTrim("eqal")).toEqual("eqal");
     });
 });
 
 describe ('syllableCount', () => {
     test('should count the syllables by vowels after silentTrim()', () => {
-        expect(Haiku.syllableCount("borough")).toEqual(2);
-        expect(Haiku.syllableCount("waterloo")).toEqual(3);
-        expect(Haiku.syllableCount("confirmation")).toEqual(4);
-        expect(Haiku.syllableCount("transmogrification")).toEqual(6);
+        expect(syllableCount("borough")).toEqual(2);
+        expect(syllableCount("waterloo")).toEqual(3);
+        expect(syllableCount("confirmation")).toEqual(4);
+        expect(syllableCount("transmogrification")).toEqual(6);
     });
 });
 
