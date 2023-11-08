@@ -3,17 +3,16 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "extends": ["eslint:recommended", "plugin:jest/reccomended"],
+    "extends": ["eslint:recommended"],
     "env": {
         "es6": true,
         "browser": true,
         "node": true
     },
+    "ignorePatterns": ["**.test.js"],
     "rules": {
         "semi": 1,
         "indent": ["warn", 4],
         "no-console": "warn"
-    },
-    "plugins": ["jest"]
-
+    }
 }

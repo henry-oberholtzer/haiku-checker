@@ -13,6 +13,8 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@babel/core": "^7.22.5",
+        "@babel/plugin-transform-modules-commonjs": "^7.22.5",
         "clean-webpack-plugin": "^4.0.0",
         "css-loader": "^6.8.1",
         "eslint": "^8.53.0",
@@ -25,6 +27,6 @@
         "webpack-dev-server": "4.15.1"
     },
     "dependencies": {
-        "eslint-plugin-jest": "^27.6.0"
+        "babel": "^6.23.0"
     }
 }
