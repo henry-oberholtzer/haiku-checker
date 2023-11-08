@@ -1,4 +1,4 @@
-import { silentTrim, Haiku } from './../src/js/haiku.js'
+import { silentTrim, Haiku, syllableCount, haikuSplit, haikuSyllableCount} from './../src/js/haiku.js'
 
 describe ('silentTrim', () => {
     test('should accept a string and trim any vowel at the end of a word', () => {
@@ -23,7 +23,7 @@ describe ('syllableCount', () => {
 
 describe('haikuSplit', () => {
     test('this should split haiku by words', () => {
-        expect(Haiku.haikuSplit(
+        expect(haikuSplit(
             "Wind in the blossoms A sweet fragrance in the air Bees drunk on nectar"))
             .toEqual([
                 "Wind", "in", "the", "blossoms", 
@@ -34,8 +34,17 @@ describe('haikuSplit', () => {
 
 describe('haikuSyllableCount', () => {
     test('should count all syllables in the haikuSplit() array using syllableCount()', () => {
-        expect(Haiku.haikuSyllableCount(
+        expect(haikuSyllableCount(
             "Wind in the blossoms A sweet fragrance in the air Bees drunk on nectar"
+        )).toEqual(17);
+        expect(haikuSyllableCount(
+            "A simple blade of grass without fanfare it quietly sustains life"
+        )).toEqual(17);
+        expect(haikuSyllableCount(
+            "Flakes of crystal snow unhurried they gently fall soft snow geese landing"
+        )).toEqual(17);
+        expect(haikuSyllableCount(
+            "White chrysanthemum purity nest in green a gift for my eyes"
         )).toEqual(17);
     });
 });
