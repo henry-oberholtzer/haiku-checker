@@ -22,10 +22,13 @@ const silentTrim = word => {
     return trimmed.replace(/[aeiou]{2}/gi, "a");
 };
 
-const syllableCount = (syllable) => {
+const syllableCount = (word) => {
     let count = 0;
-    silentTrim(syllable).split("").forEach((letter) => {
+    const letterArray = silentTrim(word).split("");
+    letterArray.forEach((letter, i) => {
         if (letter.match(/[aeiou]/i)) {
+            count++;
+        } else if (letter === "y" && i !== 0 && i !== letterArray.length - 1) {
             count++;
         }
     });
