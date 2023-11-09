@@ -1,4 +1,4 @@
-import { silentTrim, Haiku, syllableCount, haikuSplit, haikuSyllableCount} from './../src/js/haiku.js'
+import { silentTrim, syllableCount, haikuSplit, haikuSyllableCount} from './../src/js/haiku.js'
 
 describe ('silentTrim', () => {
     test('should accept a string and trim any vowel at the end of a word', () => {

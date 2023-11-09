@@ -1,13 +1,4 @@
-export { silentTrim, Haiku, syllableCount, haikuSplit, haikuSyllableCount };
-
-
-class Haiku {
-    constructor(haikuString) {
-        this.haiku = haikuString;
-    }
-
-
-}
+export { silentTrim, syllableCount, haikuSplit, haikuSyllableCount };
 
 const noPlurals = (word) => {
     if (word.charAt(word.length - 1).match(/[s]/i)) {
@@ -17,7 +8,7 @@ const noPlurals = (word) => {
 };
 
 const silentTrim = word => {
-    
+
     let trimmed = word;
     const vowelLength = word.match(/[aeiouy]/gi);
     if (vowelLength.length === 1) {
@@ -29,7 +20,7 @@ const silentTrim = word => {
     } else if (word.charAt(word.length - 1).match(/[aeiou]/i)) {
         trimmed = word.slice(0, word.length - 1);
     }
-    return trimmed.replace(/[aeiou]{2}/gi, "a");
+    return trimmed.replace(/(eau)/gi, "a").replace(/[aeiou]{2}/gi, "a");
 };
 
 const syllableCount = (word) => {
@@ -51,10 +42,11 @@ const haikuSplit = (haiku) => {
 };
 
 const haikuSyllableCount = (haiku) => {
-    let totalSyllables = 0;
-    haikuSplit(haiku).forEach(word => {
-        totalSyllables = totalSyllables + syllableCount(word);
-        console.log("Word: " + word + " Syllable Count: " + syllableCount(word) + "Total Syallables: " + totalSyllables);
-    });
-    return totalSyllables;
+    if (haiku.match(/[aeiouy]/gi)) {
+        let totalSyllables = 0;
+        haikuSplit(haiku).forEach(word => {
+            totalSyllables = totalSyllables + syllableCount(word);
+        });
+        return totalSyllables;
+    } return 0;
 };
