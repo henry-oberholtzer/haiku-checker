@@ -12,18 +12,17 @@ By Henry Oberholtzer & Gabriel Tucker
 
 ## Description
 
+Accepts a string for a haiku and returns the syllable count and if it passes as a haiku.
+
 ## Setup/Installation Requirements
 
-*   _This is a great place_
-*   _to list setup instructions_
-*   _in a simple_
-*   _easy-to-understand_
-*   _format_
+*   Download the ZIP folder from github
+*   Open with VS Code & run "npm build" in terminal
+*   To view in broswer run "npm run start"
 
 ## Known Bugs
 
-*   _Any known issues_
-*   _should go here_
+*   Does not check for haiku line breaks
 
 ## License
 
