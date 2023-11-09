@@ -58,4 +58,13 @@ class Haiku {
         const lineArray = this.haikuString.split(/\r?\n/);
         return lineArray;
     }
+
+    lineSyllable() {
+        const lineArray = this.lineSplit(this.haikuString);
+        let syllablesPerLine = [];
+        lineArray.forEach((line) =>
+            syllablesPerLine.push(this.syllables(line)));
+        console.log(syllablesPerLine);
+        return syllablesPerLine;
+    }
 }

@@ -1,15 +1,24 @@
 body{
-background-color: rgb(42, 148, 74);
-text-align: center;
-border: 3px solid black;
-border-radius: 10px;
-width: 500px;
-margin: auto;
+background-color: rgb(245, 239, 231);
 }
 #form{
+display: block;
 text-align: center;
+border: 1px solid black;
+border-radius: 10px;
+width: 350px;
+margin: auto;
+margin-top: 30%;
 }
-textarea{
+#haikus {
+    width: 350px;
+    margin: auto;
+}
 
+#haiku 
+textarea{
     border-radius: 10px;
+}
+h1{
+    text-align: center;
 }
