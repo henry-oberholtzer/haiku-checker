@@ -28,7 +28,7 @@ describe('haikuSplit', () => {
             .toEqual([
                 "Wind", "in", "the", "blossoms", 
                 "A", "sweet", "fragrance", "in", "the", "air", 
-                "Bees", "drunk", "on", "nectar"])
+                "Bees", "drunk", "on", "nectar"]);
     });
 });
 
@@ -44,7 +44,7 @@ describe('haikuSyllableCount', () => {
             "Flakes of crystal snow unhurried they gently fall soft snow geese landing"
         )).toEqual(17);
         expect(haikuSyllableCount(
-            "White chrysanthemum purity nest in green a gift for my eyes"
+            "White chrysanthemum purity nested in green a gift for my eyes"
         )).toEqual(17);
     });
 });

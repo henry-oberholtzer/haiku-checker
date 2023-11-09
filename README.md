@@ -1,15 +1,14 @@
-# (Application Name)
+# Haiku Checker
 
-#### (Brief Description of Application)
+#### A JS app to check if a haiku meets the syllable rules
 
-By Henry Oberholtzer
+By Henry Oberholtzer & Gabriel Tucker
 
 ## Technologies Used
 
-*   _List all_
-*   _the major technologies_
-*   _you used in your project_
-*   _here_
+*   JavaScript
+*   HTML
+*   CSS
 
 ## Description
 
@@ -28,5 +27,5 @@ By Henry Oberholtzer
 
 ## License
 
-Copyright [Henry Oberholtzer](https://www.henryoberholtzer.com/) (c) 2023
+Copyright [Henry Oberholtzer](https://www.henryoberholtzer.com/) & Gabriel Tucker (c) 2023
 Code licensed under GNU GPLv3
