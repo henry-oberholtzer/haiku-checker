@@ -1,10 +1,10 @@
-import { Haiku } from "./js/haiku";
+import { haikuChecker, lineSplit } from "./js/haiku";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './css/styles.css';
 document.addEventListener("submit", (e) => {
     e.preventDefault();
-    const input = new Haiku(document.querySelector("#input").value);
+    const input = document.querySelector("#input").value;
     const haikuDiv = document.createElement("div");
     const syllableP = document.createElement("p");
     const mainDiv = document.createElement("div");
@@ -21,7 +21,7 @@ document.addEventListener("submit", (e) => {
         mainDiv.append(haikuDiv);
         haikus.append(mainDiv);
     } else {
-        const syllables = input.syllables();
+        const syllables = haikuChecker(input);
         const syllableString = `Syllables: ${syllables}`;
         if (syllables !== 17) {
             line1.append("Haiku it is not");
@@ -32,7 +32,7 @@ document.addEventListener("submit", (e) => {
             mainDiv.append(haikuDiv, syllableP);
             haikus.append(mainDiv);
         } else {
-            const lineArray = input.lineSplit();
+            const lineArray = lineSplit(input);
             line1.append(lineArray[0]);
             line2.append(lineArray[1]);
             line3.append(lineArray[2]);
