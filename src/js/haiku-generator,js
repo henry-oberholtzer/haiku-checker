@@ -1,0 +1,137 @@
+export const getRandomInt = (max) => Math.floor(Math.random() * max);
+
+const chooseVowel = (num) => {
+    if (0 <= num && num <= 28) {
+        return "e";
+    } if (num > 28 && num <= 51) {
+        return "a";
+    } if (num > 51 && num <= 72) {
+        return "i";
+    } if (num > 72 && num <= 90) {
+        return "o";
+    } if (num > 90 & num <= 100) {
+        return "u";
+    }
+};
+
+const rareConsonants = (num) => {
+    if (0 < num && num <= 30) {
+        return "x";
+    } if (30 < num && num <= 60) {
+        return "z";
+    } if (60 < num && num <= 80) {
+        return "j";
+    } if (80 < num && num <= 100) {
+        return "q";
+    }
+};
+
+const  chooseCons  = (num) => {
+    if (0 <= num && num <= 12){
+        return "r";
+    } if (12 < num && num <= 24){
+        return "t";
+    } if (24 < num && num <= 35){
+        return "n";
+    } if (35 < num && num <= 44){
+        return "s";
+    } if (44 < num && num <= 53){
+        return "l";
+    } if (53 < num && num <= 60){
+        return "c";
+    } if (60 < num && num <= 66){
+        return "d";
+    } if (66 < num && num <= 71){
+        return "p";
+    } if (71 < num && num <= 76){
+        return "m";
+    } if (76 < num && num <= 81){
+        return "h";
+    } if (81 < num && num <= 85){
+        return "g";
+    } if (85 < num && num <= 88){
+        return "b";
+    } if (88 < num && num <= 91){
+        return "f";
+    } if (91 < num && num <= 94){
+        return "y";
+    } if (94 < num && num <= 96){
+        return "w";
+    } if (96 < num && num <= 98){
+        return "k";
+    } if (98 < num && num <= 99){
+        return "v";
+    } if (99 < num && num <= 100) {
+        return rareConsonants(getRandomInt(100));
+    }
+};
+
+const generateSyllable = () => {
+    return chooseCons(getRandomInt(100)) + chooseVowel(getRandomInt(100));
+};
+
+const generateComplexSyllable = (vowelAmount) => {
+    return (consonantAmount) => {
+        return letterRepeater(consonantAmount)(chooseCons) + letterRepeater(vowelAmount)(chooseVowel);
+    };
+};
+
+const letterRepeater = (num) => {
+    return (func) => {
+        let str = "";
+        for (let i = 0; i <= num; i++) {
+            str = str.concat(func(getRandomInt(100)));
+        }
+        return str;
+    };
+};
+
+
+const badHaikuLineGenerator = (complexSyllableVowels) => {
+    return (complexSyllableConsonants) => {
+        return (complexSyllablePreference) => {
+            return (wordLengthPreference) => {
+                return (syllableLength) => {
+                    let str = "";
+                    for (let i = 0; i < syllableLength; i++) {
+                        if (complexSyllablePreference < 1) {
+                            str = str.concat(generateSyllable());
+                        } else {
+                            str = str.concat(generateComplexSyllable(complexSyllableVowels))(complexSyllableConsonants);
+                        }
+                        if (i !== syllableLength - 1 && wordLengthPreference % i === 0 ) {
+                            str = str.concat(" ");
+                        }
+                    }
+                    return str;
+                };
+            };
+        };
+    };
+};
+
+export const badHaikuGenerator = (complexSyllableVowels) => {
+    return (complexSyllableConsonants) => {
+        return (complexSyllablePreference) => {
+            return (wordLengthPreference) => {
+                const haiku = "";
+                const linePrefs = badHaikuLineGenerator(complexSyllableVowels)(complexSyllableConsonants)(complexSyllablePreference)(wordLengthPreference);
+                haiku.concat(linePrefs(5) + "\n");
+                haiku.push(linePrefs(5) + "\n");
+                haiku.push(linePrefs(5) + "\n");
+                return haiku;
+            };
+        };
+    };
+};
+
+//  const realConsonantCluster = (num) =>
+//     const list = [
+        
+//    ]
+
+
+
+//th 
+//tt 
+//ph 

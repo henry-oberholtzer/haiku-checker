@@ -64,7 +64,6 @@ class Haiku {
         let syllablesPerLine = [];
         lineArray.forEach((line) =>
             syllablesPerLine.push(this.syllables(line)));
-        console.log(syllablesPerLine);
         return syllablesPerLine;
     }
 }

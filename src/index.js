@@ -1,10 +1,15 @@
 import { Haiku } from "./js/haiku";
+import { getRandomInt, badHaikuGenerator } from "./js/haiku-generator,js";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './css/styles.css';
 document.addEventListener("submit", (e) => {
     e.preventDefault();
-    const input = new Haiku(document.querySelector("#input").value);
+    const input = new Haiku(document.querySelector("#input").value.trim());
+    printHaikuAnalysis(input);
+});
+
+const printHaikuAnalysis = (input) => {
     const haikuDiv = document.createElement("div");
     const syllableP = document.createElement("p");
     const mainDiv = document.createElement("div");
@@ -13,7 +18,7 @@ document.addEventListener("submit", (e) => {
     const line2 = document.createElement("p");
     const line3 = document.createElement("p");
     haikus.innerHTML = "";
-    if (document.querySelector("#input").value.trim() === "") {
+    if (input.haikuString === "") {
         line1.append("Do you hear it the");
         line2.append("Silence in the text box here");
         line3.append("For there is nothing");
@@ -42,4 +47,13 @@ document.addEventListener("submit", (e) => {
             haikus.append(mainDiv);
         }
     }
+};
+
+document.getElementById("generate").addEventListener("click", () => {
+    const complexSyllableVowels = getRandomInt(2);
+    const complexSyllableConsonants = getRandomInt(2);
+    const wordLengthPreference = getRandomInt(4);
+    const haiku = badHaikuGenerator(complexSyllableVowels)(complexSyllableConsonants)(wordLengthPreference);
+    const input = new Haiku(haiku);
+    printHaikuAnalysis(input);
 });
