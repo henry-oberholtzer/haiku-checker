@@ -114,11 +114,11 @@ export const badHaikuGenerator = (complexSyllableVowels) => {
     return (complexSyllableConsonants) => {
         return (complexSyllablePreference) => {
             return (wordLengthPreference) => {
-                const haiku = "";
+                const haiku = [];
                 const linePrefs = badHaikuLineGenerator(complexSyllableVowels)(complexSyllableConsonants)(complexSyllablePreference)(wordLengthPreference);
-                haiku.concat(linePrefs(5) + "\n");
-                haiku.push(linePrefs(5) + "\n");
-                haiku.push(linePrefs(5) + "\n");
+                haiku.push(linePrefs(5));
+                haiku.push(linePrefs(7));
+                haiku.push(linePrefs(5));
                 return haiku;
             };
         };
@@ -129,9 +129,3 @@ export const badHaikuGenerator = (complexSyllableVowels) => {
 //     const list = [
         
 //    ]
-
-
-
-//th 
-//tt 
-//ph 

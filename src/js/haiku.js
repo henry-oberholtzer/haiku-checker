@@ -1,69 +1,94 @@
-export { Haiku };
+export { haikuChecker };
 
-class Haiku {
-    constructor(haikuString) {
-        this.haikuString = haikuString;
-    }
+const singleCharacterMatch = (params) => {
+    return (characterPosition) => {
+        return (regexString) => {
+            const regex = new RegExp(`${regexString}`, `${params}`);
+            return (word) => {
+                const character = word.charAt(word.length - characterPosition);
+                return character.match(regex) ? true : false;
+            };
+        };
+    };
+};
 
-    syllables() {
-        const noPlurals = (word) => {
-            if (word.charAt(word.length - 1).match(/[s]/i)) {
-                return word.slice(0, word.length - 1);
-            }
-            return word;
-        };
-        const silentTrim = word => {
-            let trimmed = word;
-            const vowelLength = word.match(/[aeiouy]/gi);
-            if (vowelLength.length === 1) {
-                return word.replace(/[aeiouy]/gi, "a");
-            } else if (word.charAt(word.length - 2).match(/[t]/i) && word.charAt(word.length - 1).match(/[e]/i)) {
-                trimmed = word.slice(0, word.length - 1);
-            } else if (word.charAt(word.length - 2).match(/[tl]/i) && word.charAt(word.length - 1).match(/[aeiouy]/i)) {
-                trimmed = word.slice(0, word.length - 1) + "a";
-            } else if (word.charAt(word.length - 1).match(/[aeiou]/i)) {
-                trimmed = word.slice(0, word.length - 1);
-            }
-            return trimmed.replace(/(eau)/gi, "a").replace(/[aeiou]{2}/gi, "a");
-        };
-        const syllableCount = (word) => {
-            let count = 0;
-            const letterArray = silentTrim(noPlurals(word)).split("");
-            letterArray.forEach((letter, i) => {
-                if (letter.match(/[aeiou]/i)) {
-                    count++;
-                } else if (letter === "y" && i !== 0 && i !== letterArray.length - 1) {
-                    count++;
-                }
-            });
-            return count;
-        };
-        const haikuSplit = (haiku) => {
-            let haikuArray = haiku.split(" ");
-            return haikuArray;
-        };
-        const haikuSyllableCount = (haiku) => {
-            if (haiku.match(/[aeiouy]/gi)) {
-                let totalSyllables = 0;
-                haikuSplit(haiku).forEach(word => {
-                    totalSyllables = totalSyllables + syllableCount(word);
-                });
-                return totalSyllables;
-            } return 0;
-        };
-        return haikuSyllableCount(this.haikuString);
-    }
+const caseInsensitiveRegEx = singleCharacterMatch("i");
+const secondFromEnd = caseInsensitiveRegEx(2);
+const lastCharacter = caseInsensitiveRegEx(1);
+const matchTSecond = secondFromEnd("[t]");
+const matchEEnd = lastCharacter("[e]");
+const matchSEnd = lastCharacter("[s]");
+const matchTlSecond = secondFromEnd("[tl]");
+const matchKSecond = secondFromEnd("[k]");
+const matchESecond = secondFromEnd("[e]");
+const matchAeiouEnd = lastCharacter("[aeiou]");
+const matchAeiouyEnd = lastCharacter("[aeiouy]");
+const matchNotAeiouEnd = lastCharacter("[qwrtypsdfghjklzxcvbnm]");
 
-    lineSplit() {
-        const lineArray = this.haikuString.split(/\r?\n/);
-        return lineArray;
-    }
+const sliceEndChar = (word) => word.slice(0, word.length - 1);
 
-    lineSyllable() {
-        const lineArray = this.lineSplit(this.haikuString);
-        let syllablesPerLine = [];
-        lineArray.forEach((line) =>
-            syllablesPerLine.push(this.syllables(line)));
-        return syllablesPerLine;
+const multipleVowelReplace = (word) =>
+    word.replace(/(eau)/gi, "a").replace(/[aeiou]{2}/gi, "a");
+
+const noPlurals = (word) => {
+    if (matchSEnd(word)) {
+        return sliceEndChar(word);
     }
-}
+    return word;
+};
+
+const silentTrim = (word) => {
+    const vowelLength = word.match(/[aeiouy]/gi);
+    const resultProcess = multipleVowelReplace;
+    const sliceChar = sliceEndChar(word);
+    if (vowelLength.length === 1) {
+        return word.replace(/[aeiouy]/gi, "a");
+    } else if (matchNotAeiouEnd(word) && matchESecond(word)) {
+        return resultProcess(word.slice(0, word.length - 2)).concat(
+            word.slice(word.length - 2)
+        );
+    } else if (matchTSecond(word) && matchEEnd(word)) {
+        return resultProcess(sliceChar);
+    } else if (
+        (matchTlSecond(word) || matchKSecond(word)) &&
+        matchAeiouyEnd(word)
+    ) {
+        return resultProcess(sliceChar) + "a";
+    } else if (matchAeiouEnd(word)) {
+        return resultProcess(sliceChar);
+    }
+    return resultProcess(word);
+};
+
+const syllableCount = (word) => {
+    let count = 0;
+    const letterArray = silentTrim(noPlurals(word)).split("");
+    letterArray.forEach((letter, i) => {
+        if (letter.match(/[aeiou]/i)) {
+            count++;
+        } else if (letter === "y" && i !== 0 && i !== letterArray.length - 1) {
+            count++;
+        }
+    });
+    return count;
+};
+
+const wordSplit = (line) => {
+    const wordArray = line.split(" ");
+    return wordArray;
+};
+
+export const lineSplit = (haikuString) => haikuString.match(/[^\r\n]+/g);
+
+const haikuChecker = (haikuString) => {
+    const lineArray = lineSplit(haikuString);
+    const totalSyllableCount = lineArray.map((line) => {
+        const lineWords = wordSplit(line);
+        let lineSyllables = 0;
+        lineWords.forEach((word) => {
+            lineSyllables = lineSyllables + syllableCount(word);
+        });
+        return lineSyllables;
+    });
+    return totalSyllableCount;
+};
