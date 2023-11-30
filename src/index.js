@@ -50,10 +50,14 @@ const haikuAnalysis = (input) => {
 };
 
 document.getElementById("generate").addEventListener("click", () => {
-    const complexSyllableVowels = getRandomInt(2);
-    const complexSyllableConsonants = getRandomInt(2);
-    const complexSyllablePreference = getRandomInt(1);
-    const wordLengthPreference = getRandomInt(4);
+    const comSylVowels = parseInt(document.getElementById("comSylVowels").value) - 1;
+    const comSylCons = parseInt(document.getElementById("comSylCons").value) - 1;
+    const sylLength = parseInt(document.getElementById("sylLength").value) - 1;
+    const wordLength = parseInt(document.getElementById("wordLength").value) - 1;
+    const complexSyllableVowels = getRandomInt(comSylVowels);
+    const complexSyllableConsonants = getRandomInt(comSylCons);
+    const complexSyllablePreference = getRandomInt(sylLength);
+    const wordLengthPreference = getRandomInt(wordLength);
     const haiku = badHaikuGenerator(complexSyllableVowels)(complexSyllableConsonants)(complexSyllablePreference)(wordLengthPreference);
     const haikuDiv = document.createElement("div");
     const syllableP = document.createElement("p");

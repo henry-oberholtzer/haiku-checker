@@ -97,7 +97,7 @@ const badHaikuLineGenerator = (complexSyllableVowels) => {
                         if (complexSyllablePreference < 1) {
                             str = str.concat(generateSyllable());
                         } else {
-                            str = str.concat(generateComplexSyllable(complexSyllableVowels))(complexSyllableConsonants);
+                            str = str.concat(generateComplexSyllable(complexSyllableVowels)(complexSyllableConsonants));
                         }
                         if (i !== syllableLength - 1 && wordLengthPreference % i === 0 ) {
                             str = str.concat(" ");
@@ -124,8 +124,3 @@ export const badHaikuGenerator = (complexSyllableVowels) => {
         };
     };
 };
-
-//  const realConsonantCluster = (num) =>
-//     const list = [
-        
-//    ]
